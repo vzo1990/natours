@@ -3,9 +3,7 @@ import { showAlert } from './alert';
 
 export const bookTour = async (id) => {
   try {
-    const res = await axios(
-      `http://127.0.0.1:3000/api/v1/booking/checkout-session/${id}`,
-    );
+    const res = await axios(`/api/v1/booking/checkout-session/${id}`);
 
     location.assign(res.data.stripeSession.url);
   } catch (e) {
