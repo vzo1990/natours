@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const compression = require('compression');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
@@ -68,6 +69,8 @@ app.use(
     limit: '100kb',
   }),
 );
+
+app.use(compression());
 
 app.use(cookieParser());
 
