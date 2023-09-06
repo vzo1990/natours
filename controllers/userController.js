@@ -35,8 +35,12 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 exports.updateUser = catchAsync(async (req, res, next) => {
-  if (req.file) req.body.photo = req.file.filename;
-  await factory.updateOne(User, ['name', 'email', 'photo'])(req, res, next);
+  const allowedParameters = ['name', 'email'];
+  if (req.file) {
+    req.body.photo = req.file.filename;
+    allowedParameters.push('photo');
+  }
+  await factory.updateOne(User, allowedParameters)(req, res, next);
 });
 exports.deleteUserById = factory.deleteOne(User);
 
